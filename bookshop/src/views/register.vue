@@ -5,28 +5,27 @@
         <table></table>
         <div class="body"> 
 		  <div class="_bmbottom">
-			<input type="text" class="_buname _binp " :class="flag1==1?'_binpborderc':''" placeholder="请输入用户名" @blur="uname" v-model="username">  
+			<input type="text" class="_buname _binp f1" :class="flag1==1?'_binpborderc':''" placeholder="请输入用户名" @blur="uname" v-model="username">  
 		  	<div></div>
 			<span :class="flag1==1?'spanno':'spanoff' ">{{flag1==1?'用户名错误':''}}</span>
 		  </div>
 		  <div class="_bmbottom">
-			<input type="password" class="_bupwd _binp" placeholder="请输入密码" v-model="password" @blur="upwd" :class="flag2==1?'_binpborderc':''">
+			<input type="password" class="_bupwd _binp f2" placeholder="请输入密码" v-model="password" @blur="upwd" :class="flag2==1?'_binpborderc':''">
 			<div></div>
-		  	<span :class="flag2==1?'spanno':'spanoff' ">{{flag2==1?'密码错误':'1'}}</span>
+		  	<span :class="flag2==1?'spanno':'spanoff' ">{{flag2==1?'密码错误':''}}</span>
 		  </div>
            <div class="_bmbottom">
-			<input type="password" class="_bupwd _binp" placeholder="请确认密码" v-model="upwdtwo" @blur="userpwdtwo" :class="flag3==1?'_binpborderc':''">
+			<input type="password" class="_bupwd _binp f3" placeholder="请确认密码" v-model="upwdtwo" @blur="userpwdtwo" :class="flag3==1?'_binpborderc':''">
 			<div></div>
-		  	<span :class="flag3==1?'spanno':'spanoff' ">{{flag3==1?'两次密码不一致':'1'}}</span>
+		  	<span :class="flag3==1?'spanno':'spanoff' ">{{flag3==1?'两次密码不一致':''}}</span>
 		  </div>
 		  <div class="_bmbottom">
-			<input type="text" class="_bupwd _binp" placeholder="请输入手机号" v-model="tel" @blur="userphone" :class="flag4==1?'_binpborderc':''">
+			<input type="text" class="_bupwd _binp f4"  placeholder="请输入手机号" v-model="tel" @blur="userphone" :class="flag4==1?'_binpborderc':''">
 			<div></div>
 		  	<span :class="flag4==1?'spanno':'spanoff' ">{{flag4==1?'手机号格式错误':'1'}}</span>
 		  </div>
 		  <div style="width:100%;margin-top:5%">
 			  <button class="_bbtn1" style="background:none" @click="myRegister">提交</button>
-			  <!-- <router-link to="#" class="_bbtn1" @click="myRegister">提交</router-link> -->
 			  <router-link to="./login" class="_bbtn2" >退出</router-link>
 		  </div>
 	  </div>	
@@ -39,10 +38,10 @@ import 	{mapActions} from 'vuex';
 	data(){
 		return{
 			checked: true,
-			flag1:false,
-			flag2:false,
-			flag3:false,
-			flag4:false,
+			flag1:'',
+			flag2:'',
+			flag3:'',
+			flag4:'',
 			username:"",
 			password:"",
 			upwdtwo:"",
@@ -55,11 +54,11 @@ import 	{mapActions} from 'vuex';
 			let str=this.username;
 			if(str.match(/^[a-zA-Z0-9]{6,16}$/,"")){
 				console.log(str.match(/^[a-zA-Z0-9_-]{6,16}$/,""));
+				console.log(this.username+' '+this.flag1);
 				this.flag1=false;
-				console.log(this.username+' '+this.flag1);
 			}else{
-				console.log(this.username+' '+this.flag1);
 				this.flag1=true;
+				console.log(this.username+' '+this.flag1);
 			}
 		},
 		upwd:function () {
@@ -74,7 +73,9 @@ import 	{mapActions} from 'vuex';
         },
         userpwdtwo:function () {
             if(this.password===this.upwdtwo&&this.password!=''){
-                this.flag3=false;
+				this.flag3=false;
+				console.log(222);
+				
             }else{
                 this.flag3=true;
             }
@@ -82,26 +83,37 @@ import 	{mapActions} from 'vuex';
         userphone:function(){
             if(this.tel.match(/^[1]([3-9])[0-9]{9}$/,'')){
 				this.flag4=false;
-				console.log(typeof this.tel);
+				
 				
             }else{
                 this.flag4=true;
             }
 		},
 		myRegister(){
-			console.log(this.username+' '+this.password)
-			this.register({
-				username:this.username,
-				password:this.password,
-				tel:this.tel
-			}).then(()=>{
-				this.$router.go(-1)
-			})
+			console.log(this.username+' '+this.password)	
+			let p1= document.getElementsByClassName("f1")[0].value;
+			let p2= document.getElementsByClassName("f2")[0].value;
+			let p3= document.getElementsByClassName("f3")[0].value;
+			let p4= document.getElementsByClassName("f4")[0].value;
+			console.log();
+			
+			if(!p1=='' &&!p2=="" &&!p3=="" &&!p4==""){
+				console.log(111);
+				
+				this.register({
+					username:this.username,
+					password:this.password,
+					tel:this.tel
+				}).then(()=>{
+					this.$router.go(-1)
+				})
+			}
 		},
 		...mapActions([
 			'register'
 		]),
 		jumplogin:function(){
+			
 			this.$router.go(-1);
 		}
 	}

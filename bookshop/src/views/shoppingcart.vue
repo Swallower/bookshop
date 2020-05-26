@@ -186,16 +186,16 @@ export default {
     },
     computed: {
          ...mapState(['token','cartList','MySite']),
-        listenCartList() {
-            return this.$store.state.cartList;
-        }
+        // listenCartList() {
+        //     return this.$store.state.cartList;
+        // }
          
     },
-    watch:{
-      listenCartList:function(old){
-          this.cartList = old;
-         }
-    },
+    // watch:{
+    //   listenCartList:function(old){
+    //       this.cartList = old;
+    //      }
+    // },
     methods:{
         returnFloat: function (value){
             var value=Math.round(parseFloat(value)*100)/100;
@@ -211,15 +211,16 @@ export default {
             return value;
             }
         },
-        async delCart(id){
-            let a= await this.delCartList({
+        delCart(id){
+            this.delCartList({
                 id:id,
-                token:this.token
+            token:this.token
             })
-           
-            this.selCartList({
-                token:this.token
-            });
+            setTimeout(()=>{
+                this.selCartList({
+                    token:this.token
+                });
+            },200)
           
         },
         

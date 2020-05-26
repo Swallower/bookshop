@@ -173,18 +173,15 @@ export default {
             }
         },
         delorder1: function(id){
-            
-            
-            
             setTimeout(() => {
                 this.selOrder({
                     token:this.token
                 });
             }, 200);
-                                this.delOrder({
-                                    id:id,
-                                    token:this.token
-                                })
+            this.delOrder({
+                id:id,
+                token:this.token
+            })
         },
         ...mapActions(['selOrder','delOrder','selCartList']),
     }

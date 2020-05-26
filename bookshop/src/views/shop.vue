@@ -244,11 +244,7 @@ export default {
                 price:this.$refs.getSku.getSkuData().selectedNum*this.$refs.getSku.getSkuData().selectedSkuComb.price,
               
             })
-            // .then(res=>{
-            //     if(res.status==201 ){
-            //         Toast.fail('登录后才能购买哦');
-            //     }
-            // })     
+            this.show=false;
         },
         onAddCartClicked(){
             console.log(this.$route.query.item);
@@ -258,6 +254,7 @@ export default {
                 amount:this.$refs.getSku.getSkuData().selectedNum,
                 token:this.token
             })
+            this.show=false;
         }
     }
 }

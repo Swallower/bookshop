@@ -22,7 +22,7 @@
                 <van-col span="6" >
                     <div style="margin-top:18%">
                         <div style="border-radius: 20px;border:1px solid #ab5da7;display:inline-block;padding:3% 6%">  
-                            <div v-if="this.MySite==undefined ||this.MySite==''">
+                            <div v-if="!this.token">
                                 <router-link to="./login"  style="color:#ab5da7">登录</router-link><span  style="color:#ab5da7">/</span>
                                 <router-link to="./register" style="color:#ab5da7">注册</router-link>
                             </div> 
